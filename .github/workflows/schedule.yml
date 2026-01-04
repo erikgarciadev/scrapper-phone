@@ -2,8 +2,8 @@ name: Daily Scraper
 
 on:
   schedule:
-    # 12:10 PM Peru Time (UTC-5) is 17:10 UTC
-    - cron: "15 17 * * *"
+    #  9:00 AM Peru Time (UTC-5) is 14:00 UTC 
+    - cron: "0 14 * * *"
   workflow_dispatch:
 
 jobs:

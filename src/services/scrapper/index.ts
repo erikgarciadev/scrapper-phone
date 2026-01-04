@@ -15,7 +15,7 @@ export const getArticlePrice = async (url: string, selector: string, place?: str
 
         //console.log(`Using selector: ${selector}`);
         try {
-            await page.waitForSelector(selector, { timeout: 15000 });
+            await page.waitForSelector(selector, { timeout: 35000 });
         } catch (e) {
             telegramService.sendMessage(`Timeout waiting for selector ${place}`);
             console.warn(`Timeout waiting for selector ${selector}`);
