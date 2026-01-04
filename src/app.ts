@@ -27,12 +27,14 @@ const scrapers = [
 const ScrapWebsite = async () => {
 
 
-  for (const scraper of scrapers) {
+  const promises = scrapers.map(async (scraper) => {
     const price = await getArticlePrice(scraper.url, scraper.selector, scraper.name);
     if (price) {
       telegramService.sendMessage(`Precio para ${scraper.name}: ${price}`);
     }
-  }
+  });
+
+  await Promise.all(promises);
 
 
 };
