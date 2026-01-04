@@ -8,10 +8,19 @@ export const getArticlePrice = async (url: string, selector: string, place?: str
 
     try {
         // Set a user agent to avoid being blocked easily
-        await page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
+        await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
+
+        await page.setExtraHTTPHeaders({
+            'accept-language': 'es-ES,es;q=0.9,en;q=0.8'
+        });
 
         //console.log(`Navigating to ${url}...`);
         const response = await page.goto(url, { waitUntil: "networkidle2", timeout: 60000 });
+
+        if (response?.status() === 403) {
+            await page.screenshot({ path: 'blocked.png', fullPage: true });
+            throw new Error('Blocked in GitHub Actions');
+        }
 
         console.log(place + ' Status:', response?.status());
 

@@ -34,3 +34,10 @@ jobs:
           CHAT_ID_TELEGRAM: ${{ secrets.CHAT_ID_TELEGRAM }}
           # API_KEY_FIREBASE: ${{ secrets.API_KEY_FIREBASE }} # Uncomment if needed
         run: npm start
+
+      - name: Upload screenshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug
+          path: blocked.png
